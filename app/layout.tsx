@@ -34,8 +34,8 @@ const aptima = localFont({
 
 
 export const metadata: Metadata = {
-  title: "Công ty TNHH công nghệ BTG",
-  description: "Công ty TNHH công nghệ BTG",
+  title: "Công Ty TNHH BTG",
+  description: "Công Ty TNHH BTG",
 };
 
 export default function RootLayout({

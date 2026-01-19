@@ -9,3 +9,323 @@ body {
   background-color: #000000;
   color: #ffffff;
 }
+
+/* Button Invite Container */
+.btn-invite-container {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Button Invite Styles - Default State */
+.btn-invite {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: 148px;
+  height: 48px;
+  padding: 8px 24px;
+  border-radius: 36px;
+  border: 1.5px solid transparent;
+  overflow: hidden;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  background-color: #46585B;
+  background-image: 
+    linear-gradient(180deg, rgba(255, 255, 255, 0) 31.77%, rgba(255, 255, 255, 0.1) 81.77%, rgba(255, 255, 255, 0.06) 82.29%, rgba(255, 255, 255, 0) 107.29%),
+    radial-gradient(53.2% 22.92% at 49.6% 100%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%),
+    radial-gradient(32.29% 32.29% at 50% 21.87%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(270deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.4) 100%);
+  background-blend-mode: normal, overlay, overlay, overlay;
+}
+
+/* Border gradient sử dụng pseudo-element */
+.btn-invite::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 36px;
+  padding: 1.5px;
+  background: 
+    linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.6) 100%),
+    linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0.72) 50%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0) 100%);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Hover State */
+.btn-invite:hover {
+  background-color: #183538;
+  background-image: 
+    linear-gradient(180deg, rgba(255, 255, 255, 0) 31.77%, rgba(255, 255, 255, 0.1) 81.77%, rgba(255, 255, 255, 0.06) 82.29%, rgba(255, 255, 255, 0) 107.29%),
+    radial-gradient(53.2% 22.92% at 49.6% 100%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%),
+    radial-gradient(32.29% 32.29% at 50% 21.87%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(270deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+/* Button Text */
+.btn-invite-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  background: 
+    linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 100%),
+    rgba(255, 255, 255, 0.5),
+    #FFFFFF;
+  background-blend-mode: overlay;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.12);
+  position: relative;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+/* Fallback nếu background-clip không được hỗ trợ */
+@supports not (-webkit-background-clip: text) {
+  .btn-invite-text {
+    color: #FFFFFF;
+    -webkit-text-fill-color: #FFFFFF;
+    background: none;
+  }
+}
+
+/* Hiệu ứng shine/shimmer chạy từ trái qua phải */
+.shine-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  animation: shine 3s infinite;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: overlay;
+}
+
+.shine-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Hiệu ứng shine cho container absolute - không ảnh hưởng position */
+.shine-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.shine-overlay::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  animation: shine 3s infinite;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Button Invite Styles - Default State */
+.btn-invite {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 24px;
+  gap: 8px;
+  width: 148px;
+  height: 48px;
+  position: relative;
+  border-radius: 36px;
+  border: 1.5px solid transparent;
+  background-color: #46585B !important;
+  background-image: 
+    linear-gradient(180deg, rgba(255, 255, 255, 0) 31.77%, rgba(255, 255, 255, 0.1) 81.77%, rgba(255, 255, 255, 0.06) 82.29%, rgba(255, 255, 255, 0) 107.29%),
+    radial-gradient(53.2% 22.92% at 49.6% 100%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%),
+    radial-gradient(32.29% 32.29% at 50% 21.87%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(270deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.4) 100%);
+  background-blend-mode: normal, overlay, overlay, overlay;
+  transition: all 0.15s ease-in-out;
+  outline: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* Border gradient sử dụng pseudo-element */
+.btn-invite::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 36px;
+  padding: 1.5px;
+  background: 
+    linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.6) 100%),
+    linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0.72) 50%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0) 100%);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Hover State */
+.btn-invite:hover {
+  background-color: #183538 !important;
+  background-image: 
+    linear-gradient(180deg, rgba(255, 255, 255, 0) 31.77%, rgba(255, 255, 255, 0.1) 81.77%, rgba(255, 255, 255, 0.06) 82.29%, rgba(255, 255, 255, 0) 107.29%),
+    radial-gradient(53.2% 22.92% at 49.6% 100%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%),
+    radial-gradient(32.29% 32.29% at 50% 21.87%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(270deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+/* Button Text */
+.btn-invite-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  background: 
+    linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 100%),
+    rgba(255, 255, 255, 0.5),
+    #FFFFFF;
+  background-blend-mode: overlay;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.12);
+  position: relative;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+/* Fallback nếu background-clip không được hỗ trợ */
+@supports not (-webkit-background-clip: text) {
+  .btn-invite-text {
+    color: #FFFFFF;
+    -webkit-text-fill-color: #FFFFFF;
+    background: none;
+  }
+}
+
+/* Hiệu ứng shine/shimmer chạy từ trái qua phải */
+.shine-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  animation: shine 3s infinite;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: overlay;
+}
+
+.shine-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Hiệu ứng shine cho container absolute - không ảnh hưởng position */
+.shine-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.shine-overlay::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  animation: shine 3s infinite;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}

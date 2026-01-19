@@ -3,7 +3,9 @@ import { nameConstants } from "@/constants/nameConstants"
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { use, useState, useEffect, useRef } from "react"
+import { use, useState, useEffect, useRef, Activity } from "react"
+import Particles, { initParticlesEngine } from "@tsparticles/react"
+import { loadSlim } from "@tsparticles/slim"
 
 const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
   const { name } = use(params)
@@ -20,7 +22,18 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
   const normalizedName = name.toLowerCase().replace(/[\s-]/g, '')
   const normalizedKey = nameConstants.find(item => item.key.toLowerCase().replace(/[\s-]/g, '') === normalizedName)?.key
   const nameValue = nameConstants.find(item => item.key === normalizedKey)?.value
+  const nameImage = nameConstants.find(item => item.key === normalizedKey)?.image
   const [hasEnteredLoop, setHasEnteredLoop] = useState(false)
+  const [init, setInit] = useState(false)
+
+  // Init particles engine
+  useEffect(() => {
+    initParticlesEngine(async (engine) => {
+      await loadSlim(engine)
+    }).then(() => {
+      setInit(true)
+    })
+  }, [])
 
   // Detect mobile device
   useEffect(() => {
@@ -47,55 +60,43 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
-
-    // Đảm bảo video play
+  
     const playVideo = async () => {
+      if (!video.paused) return
       try {
         await video.play()
-      } catch (error) {
-        console.error('Lỗi khi play video:', error)
-      }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (_) {}
     }
-
-    // Play video khi đã load metadata
+  
     if (video.readyState >= 2) {
       playVideo()
     } else {
-      video.addEventListener('loadedmetadata', playVideo)
+      video.addEventListener("loadedmetadata", playVideo)
     }
-
-    // Xử lý loop video
+  
     const handleTimeUpdate = () => {
-      // Khi video chạy tới loopStart lần đầu
+      // 🔴 Nếu popup mở → KHÔNG loop nữa
+      if (isOpen) return
+  
+      // Chưa vào loop lần đầu
       if (!hasEnteredLoop && video.currentTime >= loopStart) {
         setHasEnteredLoop(true)
       }
-
-      // Sau khi đã vào loop → ép quay lại
+  
+      // Đã vào loop → ép quay lại
       if (hasEnteredLoop && video.currentTime >= loopEnd) {
         video.currentTime = loopStart
-        video.play().catch(console.error)
       }
     }
-
-    // Xử lý khi video kết thúc
-    const handleEnded = () => {
-      video.currentTime = loopStart
-      video.play().catch(console.error)
-    }
-
-    video.addEventListener('timeupdate', handleTimeUpdate)
-    video.addEventListener('ended', handleEnded)
-    video.addEventListener('error', (e) => {
-      console.error('Lỗi video:', e)
-    })
-
+  
+    video.addEventListener("timeupdate", handleTimeUpdate)
+  
     return () => {
-      video.removeEventListener('loadedmetadata', playVideo)
-      video.removeEventListener('timeupdate', handleTimeUpdate)
-      video.removeEventListener('ended', handleEnded)
+      video.removeEventListener("loadedmetadata", playVideo)
+      video.removeEventListener("timeupdate", handleTimeUpdate)
     }
-  }, [hasEnteredLoop, loopStart, loopEnd])
+  }, [hasEnteredLoop, loopStart, loopEnd, isOpen])
 
   if (!normalizedKey) {
     return notFound()
@@ -116,32 +117,22 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
         className="absolute inset-0 w-full h-full object-cover z-0"
       />
 
-      {showEnvelope && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          onClick={() => setIsOpen(true)}
-          className="absolute top-[70%] left-1/2 -translate-x-1/2 cursor-pointer z-10 group"
-        >
-          <Image
-            src="/images/btn/btnDefault.png"
-            alt="Mở thư mời"
-            width={148}
-            height={48}
-            className="group-hover:hidden"
-            priority
-          />
-          <Image
-            src="/images/btn/btnHover.png"
-            alt="Mở thư mời"
-            width={148}
-            height={48}
-            className="hidden group-hover:block"
-            priority
-          />
-        </motion.div>
-      )}
+
+        <Activity mode={showEnvelope ? "visible" : "hidden"}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="absolute top-[70%] left-1/2 -translate-x-1/2 cursor-pointer z-10 flex flex-row justify-center items-center"
+            >
+              <button
+                onClick={() => setIsOpen(true)}
+                className="btn-invite"
+              >
+                <span className="btn-invite-text">Mở thư mời</span>
+              </button>
+            </motion.div> 
+        </Activity>
 
       {/* Popup với background bg.png khi click nút mở */}
       {isOpen && (
@@ -151,6 +142,7 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
           transition={{ duration: 0.5 ,ease: "easeInOut"}}
           className="fixed inset-0 flex items-center  justify-center z-50"
         >
+          
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -212,8 +204,89 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
             style={{
               transformOrigin: 'center center',
             }}
-            className="relative w-full h-full rounded-lg overflow-hidden"
+            className="relative w-full h-full overflow-hidden"
           >
+            {/* Particles effect - màu deep pink bay từ góc trái dưới */}
+            {isOpen && init && (
+              <Particles
+                id="tsparticles"
+                className="absolute inset-0 z-60 opacity-50 blur-[1px]"
+                options={{
+                  background: {
+                    color: {
+                      value: "transparent",
+                    },
+                  },
+                  fpsLimit: 120,
+                  particles: {
+                    color: {
+                      value: "rgba(255, 20, 147, 0.5)", // Chỉ màu deep pink
+                    },
+                    shape: {
+                      type: "circle",
+                    },
+                    opacity: {
+                      value: 0.5,
+                    },
+                    size: {
+                      value: { min: 2, max: 5 },
+                    },
+                    number: {
+                      value: 100,
+                      density: {
+                        enable: true,
+                      },
+                    },
+                    move: {
+                      enable: true,
+                      direction: "top-right", // Từ góc trái dưới ra giữa
+                      outModes: {
+                        default: "out",
+                      },
+                      speed: { min: 1, max: 3 },
+                      straight: false,
+                    },
+                    life: {
+                      duration: {
+                        sync: false,
+                        value: { min: 3, max: 6 },
+                      },
+                      count: 0,
+                    },
+                  },
+                  emitters: [
+                    {
+                      position: {
+                        x: 0, // Góc trái
+                        y: 100, // Dưới màn hình
+                      },
+                      rate: {
+                        quantity: 10,
+                        delay: 0.1,
+                      },
+                      life: {
+                        count: 0, // Vô hạn
+                        delay: 0,
+                        duration: 0,
+                      },
+                      direction: "top-right", // Hướng từ trái dưới ra giữa
+                      size: {
+                        width: 0,
+                        height: 0,
+                      },
+                      particles: {
+                        move: {
+                          angle: {
+                            offset: 0,
+                            value: 45, // Góc 45 độ từ trái dưới
+                          },
+                        },
+                      },
+                    },
+                  ],
+                }}
+              />
+            )}
             <Image
               src="/images/bg/bg.png"
               alt="Popup Background"
@@ -223,49 +296,52 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
             />
             
             {/* Hình sy.png bên trái */}
-            <div className="absolute left-0 top-0 h-full z-25">
+            {nameImage && (
+            <div className="absolute left-0 bottom-0 h-[85vh] z-25">
               <Image
-                src="/images/bg/sy.png"
-                alt="Sy"
-                width={400}
-                height={1920}
+                src={nameImage}
+                alt={nameValue || ""}
+                width={539}
+                height={1006}
                 className="h-full w-auto object-contain"
                 priority
               />
             </div>
+            )}
             
-            <div className="absolute top-0 left-1/2 z-30 -translate-x-1/2 right-0 bottom-0 lg:max-w-none w-full h-full z-20 flex items-center justify-center">
-              <Image
-                src={isMobile ? "/images/bg/frameMobile.png" : "/images/bg/nameFrame.png"}
-                alt="Name Frame"
-                fill
-                className="object-contain lg:object-cover w-full h-full"
-                priority
+            <div className="absolute top-0 left-1/2 z-30 -translate-x-1/2 right-0 bottom-0 lg:max-w-none w-full h-full flex items-center justify-center">
+                <Image
+                  src={isMobile ? "/images/bg/frameMobile.png" : "/images/bg/nameFrame.png"}
+                  alt="Name Frame"
+                  width={1920}
+                  height={1080}
+                  className="object-cover relative w-full h-full"
+                  priority
+                  
+                />
                 
-              />
+                {/* Lớp shine overlay - trên khung nhưng dưới text */}
+              <div className=" absolute w-[calc(1052/1920*100%)] top-[calc(380/1080*100%)] h-[calc(451/1080*100%)] left-1/2 -translate-x-1/2 z-25">
+                <div className="shine-overlay "></div>
+              </div>
+                
               <div 
-                className="absolute  left-1/2 -translate-x-1/2 z-30 flex flex-col justify-start items-center text-center px-4"
-                style={isMobile ? {
-                  top: '25.55%', // 479/1873 = 25.55%
-                  width: '79.8%', // 893/1119 = 79.8%
-                  height: '39.03%', // 731/1873 = 39.03%
-                } : {
-                  top: '35.37%', // 382/1080 = 35.37%
-                  width: '54.27%', // 1042/1920 = 54.27%
-                  height: '35.09%', // 379/1080 = 35.09%
-                }}
+                className="absolute w-[calc(1060/1920*100%)] top-[calc(380/1080*100%)] h-[calc(380/1080*100%)] left-1/2 -translate-x-1/2 z-30 font-medium flex flex-col text-white lg:text-xl text-sm justify-evenly items-start text-left lg:pb-4 lg:pt-6 lg:pr-10 lg:pl-12 p-2"
               >
-                <div className="text-white lg:text-xl text-sm flex flex-col lg:gap-2 gap-1 text-left font-sans font-semibold lg:p-4 p-2">
                   <p className="">Công ty TNHH công nghệ BTG trân trọng kính mời</p>
                   <p className="">Anh/ chị: {nameValue}</p>
                   <p>Thời gian: 18 giờ 00, ngày 30/1/2026</p>
                   <p>Địa điểm: Sảnh 04 - Nhà hàng Văn Hoa - 68-76 Đ. Tản Đà, Phường Chợ Lớn</p>
                   <p>với nhiều trò chơi và rất nhiều phần quà vô cùng giá trị</p>
-                  <p>Sự hiện diện của mọi người chính là niềm &quot;mệt mỏi hạnh phúc&quot; to lớn của Ban Tổ Chức mỗi lần trao giải.</p>
+                <p>Sự hiện diện của mọi người chính là niềm &quot;mệt mỏi hạnh phúc&quot; to lớn của Ban Tổ Chức mỗi lần trao giải. Game có thưởng – tiệc có đồ ngon – đồng đội thì không thiếu.
+                Mong được gặp Anh/Chị tại buổi tiệc cuối năm để cùng khép lại 2025 thật trọn vẹn.Đến là vui, chơi là đã, về là có quà – hẹn gặp tại Year End Party BTG.</p>
                 </div>
-              </div>
+                <div className="absolute top-[calc(900/1080*100%)] left-1/2 -translate-x-1/2 z-30 font-medium text-white lg:text-xl text-sm text-center mt-2 drop-shadow-lg [text-shadow:2px_2px_4px_rgba(0,0,0,0.8)]">
+                  Design by My Yen
+                </div>
             </div>
-            <div className="absolute top-0 left-0 right-0 flex items-start justify-center z-10 pt-16">
+         
+            <div className="absolute top-0 left-0 right-0 flex items-start justify-center z-35 pt-16">
               <motion.div
                 animate={{
                   y: [0, -15, 0],
