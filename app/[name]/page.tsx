@@ -117,65 +117,30 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
       />
 
       {showEnvelope && (
-        <motion.button
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
           onClick={() => setIsOpen(true)}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          className="absolute top-[70%] left-1/2 -translate-x-1/2 cursor-pointer duration-150 ease-in-out transition-all z-10 flex flex-row justify-center items-center"
-          style={{
-            padding: '8px 24px',
-            gap: '8px',
-            width: '148px',
-            height: '48px',
-            borderRadius: '36px',
-            border: '1.5px solid',
-            borderImageSource: `
-              linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.6) 100%),
-              linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0.72) 50%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0) 100%)
-            `,
-            borderImageSlice: 1,
-            background: isHovered ? `
-              linear-gradient(180deg, rgba(255, 255, 255, 0) 31.77%, rgba(255, 255, 255, 0.1) 81.77%, rgba(255, 255, 255, 0.06) 82.29%, rgba(255, 255, 255, 0) 107.29%),
-              radial-gradient(53.2% 22.92% at 49.6% 100%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%),
-              radial-gradient(32.29% 32.29% at 50% 21.87%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
-              linear-gradient(270deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.4) 100%),
-              #183538
-            ` : `
-              linear-gradient(180deg, rgba(255, 255, 255, 0) 31.77%, rgba(255, 255, 255, 0.1) 81.77%, rgba(255, 255, 255, 0.06) 82.29%, rgba(255, 255, 255, 0) 107.29%),
-              radial-gradient(53.2% 22.92% at 49.6% 100%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%),
-              radial-gradient(32.29% 32.29% at 50% 21.87%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
-              linear-gradient(270deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.4) 100%),
-              #46585B
-            `,
-            backgroundBlendMode: 'plus-lighter, overlay, overlay, soft-light, normal',
-            boxSizing: 'border-box',
-            isolation: 'isolate',
-          }}
+          className="absolute top-[70%] left-1/2 -translate-x-1/2 cursor-pointer z-10 group"
         >
-          <span
-            className="font-medium text-base leading-[19px] tracking-[-0.02em]"
-            style={{
-              width: '89px',
-              height: '19px',
-              background: `
-                linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 100%),
-                linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
-                #FFFFFF
-              `,
-              backgroundBlendMode: 'normal, normal, overlay',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              textFillColor: 'transparent',
-              textShadow: '0px 2px 3px rgba(0, 0, 0, 0.12)',
-            }}
-          >
-            Mở thư mời
-          </span>
-        </motion.button>
+          <Image
+            src="/images/btn/btnDefault.png"
+            alt="Mở thư mời"
+            width={148}
+            height={48}
+            className="group-hover:hidden"
+            priority
+          />
+          <Image
+            src="/images/btn/btnHover.png"
+            alt="Mở thư mời"
+            width={148}
+            height={48}
+            className="hidden group-hover:block"
+            priority
+          />
+        </motion.div>
       )}
 
       {/* Popup với background bg.png khi click nút mở */}
