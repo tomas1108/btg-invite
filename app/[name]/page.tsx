@@ -24,16 +24,6 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
   const nameValue = nameConstants.find(item => item.key === normalizedKey)?.value
   const nameImage = nameConstants.find(item => item.key === normalizedKey)?.image
   const [hasEnteredLoop, setHasEnteredLoop] = useState(false)
-  const [init, setInit] = useState(false)
-
-  // Init particles engine
-  useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine)
-    }).then(() => {
-      setInit(true)
-    })
-  }, [])
 
   // Detect mobile device
   useEffect(() => {
@@ -206,87 +196,7 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
             }}
             className="relative w-full h-full overflow-hidden"
           >
-            {/* Particles effect - màu deep pink bay từ góc trái dưới */}
-            {isOpen && init && (
-              <Particles
-                id="tsparticles"
-                className="absolute inset-0 z-60 opacity-50 blur-[1px]"
-                options={{
-                  background: {
-                    color: {
-                      value: "transparent",
-                    },
-                  },
-                  fpsLimit: 120,
-                  particles: {
-                    color: {
-                      value: "rgba(255, 20, 147, 0.5)", // Chỉ màu deep pink
-                    },
-                    shape: {
-                      type: "circle",
-                    },
-                    opacity: {
-                      value: 0.5,
-                    },
-                    size: {
-                      value: { min: 2, max: 5 },
-                    },
-                    number: {
-                      value: 100,
-                      density: {
-                        enable: true,
-                      },
-                    },
-                    move: {
-                      enable: true,
-                      direction: "top-right", // Từ góc trái dưới ra giữa
-                      outModes: {
-                        default: "out",
-                      },
-                      speed: { min: 1, max: 3 },
-                      straight: false,
-                    },
-                    life: {
-                      duration: {
-                        sync: false,
-                        value: { min: 3, max: 6 },
-                      },
-                      count: 0,
-                    },
-                  },
-                  emitters: [
-                    {
-                      position: {
-                        x: 0, // Góc trái
-                        y: 100, // Dưới màn hình
-                      },
-                      rate: {
-                        quantity: 10,
-                        delay: 0.1,
-                      },
-                      life: {
-                        count: 0, // Vô hạn
-                        delay: 0,
-                        duration: 0,
-                      },
-                      direction: "top-right", // Hướng từ trái dưới ra giữa
-                      size: {
-                        width: 0,
-                        height: 0,
-                      },
-                      particles: {
-                        move: {
-                          angle: {
-                            offset: 0,
-                            value: 45, // Góc 45 độ từ trái dưới
-                          },
-                        },
-                      },
-                    },
-                  ],
-                }}
-              />
-            )}
+            
             <Image
               src="/images/bg/bg.png"
               alt="Popup Background"
