@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-aptima);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* Button Invite Styles */
+.btn-invite {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 24px;
+  gap: 8px;
+  isolation: isolate;
+  width: 148px;
+  height: 48px;
+  border-radius: 36px;
+  border: 1.5px solid;
+  border-image-source: 
+    linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.6) 100%),
+    linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0.72) 50%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0) 100%);
+  border-image-slice: 1;
+  background: 
+    linear-gradient(180deg, rgba(255, 255, 255, 0) 31.77%, rgba(255, 255, 255, 0.1) 81.77%, rgba(255, 255, 255, 0.06) 82.29%, rgba(255, 255, 255, 0) 107.29%),
+    radial-gradient(53.2% 22.92% at 49.6% 100%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%),
+    radial-gradient(32.29% 32.29% at 50% 21.87%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(270deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.4) 100%),
+    #46585B;
+  background-blend-mode: plus-lighter, overlay, overlay, soft-light, normal;
+  transition: all 0.15s ease-in-out;
+}
+
+.btn-invite:hover {
+  background: 
+    linear-gradient(180deg, rgba(255, 255, 255, 0) 31.77%, rgba(255, 255, 255, 0.1) 81.77%, rgba(255, 255, 255, 0.06) 82.29%, rgba(255, 255, 255, 0) 107.29%),
+    radial-gradient(53.2% 22.92% at 49.6% 100%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%),
+    radial-gradient(32.29% 32.29% at 50% 21.87%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(270deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.4) 100%),
+    #183538;
+}
+
+.btn-invite-text {
+  width: 89px;
+  height: 19px;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: -0.02em;
+  background: 
+    linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 100%),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+    #FFFFFF;
+  background-blend-mode: normal, normal, overlay;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.12);
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  z-index: 1;
+}
