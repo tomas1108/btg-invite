@@ -24,7 +24,7 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
   const [hasEnteredLoop, setHasEnteredLoop] = useState(false)
   
   // Kiểm tra nếu là key cần hiển thị tiếng Trung
-  const isChineseKey = normalizedKey && ['thaiyl', 'xuchuanxuan', 'yaoyao'].includes(normalizedKey.toLowerCase())
+  const isChineseKey = normalizedKey && ['thaiyi', 'xuchuanxuan', 'yaoyao'].includes(normalizedKey.toLowerCase())
 
   // Detect mobile device
   useEffect(() => {
