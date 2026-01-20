@@ -22,7 +22,7 @@ export const nameConstants = [
     {
         key: "xuchuanxuan",
         value:"Jason Xu",
-        image: "/images/guest/chuanxuan.png"
+        image: "/images/guest/chuanxuan1.png"
     },
     {
         key: "yaoyao",
