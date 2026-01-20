@@ -245,8 +245,7 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
                     <p className="">{nameValue}{isXu?'领导':''}</p>
                     <p>时间：2026年01月30日，18点</p>
                     <p>地点：68-76 伞陀街，堤岸坊  - 文华大酒楼 - 04号厅</p>
-                    <p>活动将有众多精彩游戏以及丰厚价值的奖品</p>
-                    <p>大家的到来，对组办员在每一次颁奖时，都是&quot;疲惫中的幸福&quot;
+                    <p>活动将有众多精彩游戏以及丰厚价值的奖品。大家的到来，对组办员在每一次颁奖时，都是&quot;疲惫中的幸福&quot;
                     有奖游戏，精致美食，并肩作战队友更加必不可少。
                     诚挚期待在年终聚会上与您相见，一同为 2025 画上圆满句号。来了就开心，玩了就尽兴，回去还有礼物—— 期待BTG年终晚会与你相见！</p>
                   </>
@@ -256,8 +255,8 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
                     <p className="">Anh/ chị: {nameValue}</p>
                     <p>Thời gian: 18 giờ 00, ngày 30/1/2026</p>
                     <p>Địa điểm: Sảnh 04 - Nhà hàng Văn Hoa - 68-76 Đ. Tản Đà, Phường Chợ Lớn</p>
-                    <p>với nhiều trò chơi và rất nhiều phần quà vô cùng giá trị</p>
-                    <p>Sự hiện diện của mọi người chính là niềm &quot;mệt mỏi hạnh phúc&quot; to lớn của Ban Tổ Chức mỗi lần trao giải. Game có thưởng – tiệc có đồ ngon – đồng đội thì không thiếu.
+                    
+                    <p>với nhiều trò chơi và rất nhiều phần quà vô cùng giá trị. Sự hiện diện của mọi người chính là niềm &quot;mệt mỏi hạnh phúc&quot; to lớn của Ban Tổ Chức mỗi lần trao giải. Game có thưởng – tiệc có đồ ngon – đồng đội thì không thiếu.
                     Mong được gặp Anh/Chị tại buổi tiệc cuối năm để cùng khép lại 2025 thật trọn vẹn.Đến là vui, chơi là đã, về là có quà – hẹn gặp tại Year End Party BTG.</p>
                   </>
                 )}
