@@ -242,7 +242,7 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
                 {isChineseKey ? (
                   <>
                     <p className="">BTG科技发展责任有限公司郑重邀请</p>
-                    <p className="">{nameValue}{isXu?'领导':''}</p>
+                    <p className="">{nameValue}{!isXu?'先生/女士':''}</p>
                     <p>时间：2026年01月30日，18点</p>
                     <p>地点：68-76 伞陀街，堤岸坊  - 文华大酒楼 - 04号厅</p>
                     <p>活动将有众多精彩游戏以及丰厚价值的奖品</p>
