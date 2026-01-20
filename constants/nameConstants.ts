@@ -15,13 +15,13 @@ export const nameConstants = [
         image: "/images/guest/mydung.png"
     },
     {
-        key: "thaiyl",
-        value:"Thái YL",
+        key: "thaiyi",
+        value:"Cai Di Yi",
         image: "/images/guest/ThaiYi.png"
     },
     {
         key: "xuchuanxuan",
-        value:"Xu Chuan Xuan",
+        value:"Jason Xu",
         image: "/images/guest/chuanxuan.png"
     },
     {
@@ -197,7 +197,7 @@ export const nameConstants = [
       {
         key: "duongthanhha",
         value: "Dương Thanh Hà",
-        image: "/images/guest/duongthanha.png"
+        image: "/images/guest/duongthanhha.png"
       },
       {
         key: "nguyenthimyyen",
@@ -212,12 +212,12 @@ export const nameConstants = [
       {
         key: "tranminhluan",
         value: "Trần Minh Luân",
-        image: "/images/guest/tranminhluan.png"
+        image: "/images/guest/tranminhluan.png" 
       },
       {
         key: "tranthinhquynh",
         value: "Trần Thị Như Quỳnh",
-        image: "/images/guest/tranthinhquynh.png"
+        image: "/images/guest/tranthinhuquynh.png"
       },
       {
         key: "nguyenkylequyen",
@@ -238,5 +238,15 @@ export const nameConstants = [
         key: "nguyenhongtham",
         value: "Nguyễn Hồng Thắm",
         image: "/images/guest/nguyenhongtham.png"
+      },
+      {
+        key: "lin",
+        value: "Lin",
+        image: ""
+      }, 
+      {
+        key: "tony",
+        value: "Tony",
+        image: ""
       }  
 ]  

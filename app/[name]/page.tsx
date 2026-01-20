@@ -4,8 +4,6 @@ import { notFound } from "next/navigation"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { use, useState, useEffect, useRef, Activity } from "react"
-import Particles, { initParticlesEngine } from "@tsparticles/react"
-import { loadSlim } from "@tsparticles/slim"
 
 const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
   const { name } = use(params)
@@ -24,6 +22,9 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
   const nameValue = nameConstants.find(item => item.key === normalizedKey)?.value
   const nameImage = nameConstants.find(item => item.key === normalizedKey)?.image
   const [hasEnteredLoop, setHasEnteredLoop] = useState(false)
+  
+  // Kiểm tra nếu là key cần hiển thị tiếng Trung
+  const isChineseKey = normalizedKey && ['thaiyl', 'xuchuanxuan', 'yaoyao'].includes(normalizedKey.toLowerCase())
 
   // Detect mobile device
   useEffect(() => {
@@ -221,7 +222,7 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
             
             <div className="absolute top-0 left-1/2 z-30 -translate-x-1/2 right-0 bottom-0 lg:max-w-none w-full h-full flex items-center justify-center">
                 <Image
-                  src={isMobile ? "/images/bg/frameMobile.png" : "/images/bg/nameFrame.png"}
+                  src={isMobile ? "/images/bg/frameMobile.png" : "/images/bg/frame1.png"}
                   alt="Name Frame"
                   width={1920}
                   height={1080}
@@ -231,22 +232,37 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
                 />
                 
                 {/* Lớp shine overlay - trên khung nhưng dưới text */}
-              <div className=" absolute w-[calc(1052/1920*100%)] top-[calc(380/1080*100%)] h-[calc(451/1080*100%)] left-1/2 -translate-x-1/2 z-25">
-                <div className="shine-overlay "></div>
+              <div className=" absolute w-[calc(1175/1920*100%)] top-[calc(224/1080*100%)] h-[calc(553/1080*100%)] left-[calc((960-20)/1920*100%)] -translate-x-1/2 z-25">
+                <div className="shine-overlay rounded-xl"></div>
               </div>
                 
               <div 
-                className="absolute w-[calc(1060/1920*100%)] top-[calc(380/1080*100%)] h-[calc(380/1080*100%)] left-1/2 -translate-x-1/2 z-30 font-medium flex flex-col text-white lg:text-xl text-sm justify-evenly items-start text-left lg:pb-4 lg:pt-6 lg:pr-10 lg:pl-12 p-2"
+                className="absolute w-[calc(1175/1920*100%)] top-[calc(224/1080*100%)] h-[calc(473/1080*100%)] left-[calc((960-20)/1920*100%)] -translate-x-1/2 z-30 font-medium flex flex-col text-white lg:text-xl 2l:text-2xl text-sm justify-evenly items-start text-left lg:pb-4 lg:pt-6 lg:pr-10 lg:pl-12 p-2"
               >
-                  <p className="">Công ty TNHH công nghệ BTG trân trọng kính mời</p>
-                  <p className="">Anh/ chị: {nameValue}</p>
-                  <p>Thời gian: 18 giờ 00, ngày 30/1/2026</p>
-                  <p>Địa điểm: Sảnh 04 - Nhà hàng Văn Hoa - 68-76 Đ. Tản Đà, Phường Chợ Lớn</p>
-                  <p>với nhiều trò chơi và rất nhiều phần quà vô cùng giá trị</p>
-                <p>Sự hiện diện của mọi người chính là niềm &quot;mệt mỏi hạnh phúc&quot; to lớn của Ban Tổ Chức mỗi lần trao giải. Game có thưởng – tiệc có đồ ngon – đồng đội thì không thiếu.
-                Mong được gặp Anh/Chị tại buổi tiệc cuối năm để cùng khép lại 2025 thật trọn vẹn.Đến là vui, chơi là đã, về là có quà – hẹn gặp tại Year End Party BTG.</p>
+                {isChineseKey ? (
+                  <>
+                    <p className="">BTG科技发展责任有限公司郑重邀请</p>
+                    <p className="">{nameValue}领导</p>
+                    <p>时间：2026年01月30日，18点</p>
+                    <p>地点：68-76 伞陀街，堤岸坊  - 文华大酒楼 - 04号厅</p>
+                    <p>活动将有众多精彩游戏以及丰厚价值的奖品</p>
+                    <p>大家的到来，对组办员在每一次颁奖时，都是&quot;疲惫中的幸福&quot;
+                    有奖游戏，精致美食，并肩作战队友更加必不可少。
+                    诚挚期待在年终聚会上与您相见，一同为 2025 画上圆满句号。来了就开心，玩了就尽兴，回去还有礼物—— 期待BTG年终晚会与你相见！</p>
+                  </>
+                ) : (
+                  <>
+                    <p className="">Công ty TNHH công nghệ BTG trân trọng kính mời</p>
+                    <p className="">Anh/ chị: {nameValue}</p>
+                    <p>Thời gian: 18 giờ 00, ngày 30/1/2026</p>
+                    <p>Địa điểm: Sảnh 04 - Nhà hàng Văn Hoa - 68-76 Đ. Tản Đà, Phường Chợ Lớn</p>
+                    <p>với nhiều trò chơi và rất nhiều phần quà vô cùng giá trị</p>
+                    <p>Sự hiện diện của mọi người chính là niềm &quot;mệt mỏi hạnh phúc&quot; to lớn của Ban Tổ Chức mỗi lần trao giải. Game có thưởng – tiệc có đồ ngon – đồng đội thì không thiếu.
+                    Mong được gặp Anh/Chị tại buổi tiệc cuối năm để cùng khép lại 2025 thật trọn vẹn.Đến là vui, chơi là đã, về là có quà – hẹn gặp tại Year End Party BTG.</p>
+                  </>
+                )}
                 </div>
-                <div className="absolute top-[calc(900/1080*100%)] left-1/2 -translate-x-1/2 z-30 font-medium text-white lg:text-xl text-sm text-center mt-2 drop-shadow-lg [text-shadow:2px_2px_4px_rgba(0,0,0,0.8)]">
+                <div className="absolute bottom-[calc(120/1080*100%)] translate-y-1/2 left-1/2 -translate-x-1/2 z-30 font-medium text-white lg:text-xl text-sm text-center mt-2 drop-shadow-lg [text-shadow:2px_2px_4px_rgba(0,0,0,0.8)]">
                   Design by My Yen
                 </div>
             </div>
