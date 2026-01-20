@@ -222,7 +222,7 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
             
             <div className="absolute top-0 left-1/2 z-30 -translate-x-1/2 right-0 bottom-0 lg:max-w-none w-full h-full flex items-center justify-center">
                 <Image
-                  src={isMobile ? "/images/bg/frameMobile.png" : "/images/bg/frame3.png"}
+                  src={isMobile ? "/images/bg/frameMobile.png" : "/images/bg/framefinal3.png"}
                   alt="Name Frame"
                   width={1920}
                   height={1080}
@@ -232,12 +232,12 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
                 />
                 
                 {/* Lớp shine overlay - trên khung nhưng dưới text */}
-              <div className=" absolute w-[calc(1175/1920*100%)] top-[calc(337/1080*100%)] h-[calc(553/1080*100%)] left-[calc((960-20)/1920*100%)] -translate-x-1/2 z-25">
+              <div className=" absolute w-[calc(1039/1920*100%)] top-[calc(404/1080*100%)] h-[calc(470/1080*100%)] left-[calc((960-20)/1920*100%)] -translate-x-1/2 z-25">
                 <div className="shine-overlay rounded-xl"></div>
               </div>
                 
               <div 
-                className="absolute w-[calc(1175/1920*100%)] top-[calc(337/1080*100%)] h-[calc(473/1080*100%)] left-[calc((960-20)/1920*100%)] -translate-x-1/2 z-30 font-medium flex flex-col text-white lg:text-xl 2l:text-2xl text-sm justify-evenly items-start text-left lg:pb-4 lg:pt-6 lg:pr-10 lg:pl-12 p-2"
+                className="absolute w-[calc(1039/1920*100%)] top-[calc(404/1080*100%)] h-[calc(378/1080*100%)] left-[calc((960-20)/1920*100%)] -translate-x-1/2 z-30 font-medium flex flex-col text-white lg:text-xl 2l:text-2xl text-sm justify-evenly items-start text-left lg:pb-4 lg:pt-6 lg:pr-10 lg:pl-12 p-2"
               >
                 {isChineseKey ? (
                   <>
@@ -262,7 +262,7 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
                   </>
                 )}
                 </div>
-                <div className="absolute bottom-[calc(30/1080*100%)] translate-y-1/2 left-[calc(921/1920*100%)] -translate-x-1/2 z-30 font-medium text-white lg:text-xl text-sm text-center mt-2 drop-shadow-lg [text-shadow:2px_2px_4px_rgba(0,0,0,0.8)]">
+                <div className="absolute bottom-[calc(100/1080*100%)] translate-y-1/2 left-[calc(921/1920*100%)] -translate-x-1/2 z-30 font-medium text-white lg:text-xl text-sm text-center mt-2 drop-shadow-lg [text-shadow:2px_2px_4px_rgba(0,0,0,0.8)]">
                   Design by My Yen
                 </div>
             </div>
