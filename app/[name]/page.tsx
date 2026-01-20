@@ -257,7 +257,7 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
                     <p>Thời gian: 18 giờ 00, ngày 30/1/2026</p>
                     <p>Địa điểm: Sảnh 04 - Nhà hàng Văn Hoa - 68-76 Đ. Tản Đà, Phường Chợ Lớn</p>
                     <p>Với nhiều trò chơi và rất nhiều phần quà vô cùng giá trị</p>
-                    <p>Sự hiện diện của mọi người chính là niềm &quot;mệt mỏi hạnh phúc&quot; to lớn của Ban Tổ Chức mỗi lần trao giải. Game có thưởng – tiệc có đồ ngon – đồng đội thì không thiếu.
+                    <p>Sự hiện diện của mọi người chính là niềm &quot;mệt mỏi hạnh phúc&quot; to lớn của Ban Tổ Chức. Game có thưởng – tiệc có đồ ngon – đồng đội thì không thiếu.
                     Mong được gặp Anh/Chị tại buổi tiệc cuối năm để cùng khép lại 2025 thật trọn vẹn. Đến là vui, chơi là đã, về là có quà – hẹn gặp tại Year End Party BTG.</p>
                   </>
                 )}
