@@ -25,7 +25,7 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
   
   // Kiểm tra nếu là key cần hiển thị tiếng Trung
   const isChineseKey = normalizedKey && ['thaiyi', 'xuchuanxuan', 'yaoyao'].includes(normalizedKey.toLowerCase())
-
+  const isXu= normalizedKey && ['xuchuanxuan'].includes(normalizedKey.toLowerCase())
   // Detect mobile device
   useEffect(() => {
     const checkMobile = () => {
@@ -242,7 +242,7 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
                 {isChineseKey ? (
                   <>
                     <p className="">BTG科技发展责任有限公司郑重邀请</p>
-                    <p className="">{nameValue}领导</p>
+                    <p className="">{nameValue}{isXu?'领导':''}</p>
                     <p>时间：2026年01月30日，18点</p>
                     <p>地点：68-76 伞陀街，堤岸坊  - 文华大酒楼 - 04号厅</p>
                     <p>活动将有众多精彩游戏以及丰厚价值的奖品</p>
@@ -262,7 +262,7 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
                   </>
                 )}
                 </div>
-                <div className="absolute bottom-[calc(100/1080*100%)] translate-y-1/2 left-[calc(921/1920*100%)] -translate-x-1/2 z-30 font-medium text-white lg:text-xl text-sm text-center mt-2 drop-shadow-lg [text-shadow:2px_2px_4px_rgba(0,0,0,0.8)]">
+                <div className="absolute bottom-[calc(50/1080*100%)] translate-y-1/2 left-[calc(921/1920*100%)] -translate-x-1/2 z-30 font-medium text-white lg:text-xl text-sm text-center mt-2 drop-shadow-lg [text-shadow:2px_2px_4px_rgba(0,0,0,0.8)]">
                   Design by My Yen
                 </div>
             </div>
@@ -282,9 +282,9 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
                 <Image
                   src="/images/bg/tittle.png"
                   alt="Title"
-                  width={1500}
+                  width={800}
                   height={300}
-                  className="object-cover w-[calc(1500/1920*100%)] relative left-1/2  -translate-x-1/2 h-full"
+                  className="object-cover h-full"
                   priority
                 />
               </motion.div>
