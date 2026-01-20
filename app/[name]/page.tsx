@@ -280,7 +280,7 @@ const NameDetailPage = ({ params }: { params: Promise<{ name: string }> }) => {
                 }}
               >
                 <Image
-                  src="/images/bg/tittle.png"
+                  src="/images/bg/tittle1.png"
                   alt="Title"
                   width={800}
                   height={300}
