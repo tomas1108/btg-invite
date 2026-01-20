@@ -259,4 +259,9 @@ export const nameConstants = [
         value: "Trần Thị Thúy Hằng",
         image: "/images/guest/tranthithuyhang.png"
       },
+      {
+        key: "tranthinhuhoa",
+        value: "Trần Thị Như Hoa",
+        image: "/images/guest/tranthinhuhoa.png"
+      },
 ]  
