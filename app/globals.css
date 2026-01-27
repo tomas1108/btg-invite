@@ -1,13 +1,14 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-aptima);
+  --font-sans: var(--font-mj-kedanty);
 }
 
+
 body {
-  font-family: var(--font-sans);
-  background-color: #000000;
-  color: #ffffff;
+  background: #000;
+  color: #fff;
+  font-family: var(--font-mj-kedanty);
 }
 
 /* Button Invite Container */
@@ -76,7 +77,6 @@ body {
 
 /* Button Text */
 .btn-invite-text {
-  font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 100%;
@@ -232,7 +232,6 @@ body {
 
 /* Button Text */
 .btn-invite-text {
-  font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 100%;
