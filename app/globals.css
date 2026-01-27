@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-mj-kedanty);
+  --font-sans: var(--font-aptima);
 }
 
 
 body {
   background: #000;
   color: #fff;
-  font-family: var(--font-mj-kedanty);
+  font-family: var(--font-aptima);
 }
 
 /* Button Invite Container */
@@ -78,7 +78,7 @@ body {
 /* Button Text */
 .btn-invite-text {
   font-weight: 500;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 100%;
   letter-spacing: -0.02em;
   color: #FFFFFF;
